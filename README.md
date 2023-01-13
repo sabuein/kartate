@@ -3,7 +3,7 @@ A way to organise business cards
 
 ## Production
 
-This web application can be accessed at https://kartate.com/
+This web application can be accessed at https://kartate.com/ which is currently an alias to https://sites.google.com/view/kartate/home
 
 ## Development
 
