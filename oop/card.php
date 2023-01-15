@@ -14,13 +14,50 @@ class Card {
     public string $postcode;
     public string $country;
 
+    static function increment() {
+        self::$index++;
+    }
+
+    // $yallah = function ($x) use ($y) {
+    //         return $x + $y;
+    //     };
+    // $yallah = fn($x) => $x + $y;
+    
     function __construct() {
         $this->id = self::$index;
         Card::increment();
     }
 
-    static function increment() {
-        self::$index++;
+    public function __serialize() {
+        return [
+            "id" => $this->id,
+            "title" => $this->title,
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "email" => $this->email,
+            "phone" => $this->phone,
+            "address_one" => $this->address_one,
+            "address_two" => $this->address_two,
+            "city" => $this->city,
+            "county" => $this->county,
+            "postcode" => $this->postcode,
+            "country" => $this->country
+        ];
+    }
+
+    public function __unseriallize(array $data) {
+        $this->id = $data["id"];
+        $this->title = $data["title"];
+        $this->first_name = $data["first_name"];
+        $this->last_name = $data["last_name"];
+        $this->email = $data["email"];
+        $this->phone = $data["phone"];
+        $this->address_one = $data["address_one"];
+        $this->address_two = $data["address_two"];
+        $this->city = $data["city"];
+        $this->county = $data["county"];
+        $this->postcode = $data["postcode"];
+        $this->country = $data["country"];
     }
 
     function set_title($title) {
