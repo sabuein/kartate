@@ -6,7 +6,7 @@ class URL
     public function __construct($arguments)
     {
         for ($i = 0; $i < count($arguments); $i++):
-            $this->links[$i] = $arguments[$i];
+            $this->links[$i] = "<a href=\"$arguments[$i]\" target=\"_blank\">$arguments[$i]</a>";
         endfor;
         return $this;
     }
