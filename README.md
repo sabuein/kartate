@@ -1,4 +1,4 @@
-# kartate
+# Kartate
 A way to organise business cards
 
 ## Production

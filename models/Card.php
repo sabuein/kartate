@@ -8,6 +8,8 @@ require_once "$rootDir/models/URL.php";
 
 class Card
 {
+    static int $index = 0;
+    public int $id;
     public string $name;
     public string $dob;
     public string $email;
@@ -19,6 +21,10 @@ class Card
     private $gender;
     private $allowedGenders = ["male", "female", "non-binary", "other"];
 
+    static function increment() {
+        self::$index++;
+    }
+    
     public function __construct(
         string $name,
         string $dob,
@@ -28,6 +34,8 @@ class Card
         SocialMedia $socialMedia,
         URL $url
     ) {
+        $this->id = self::$index;
+        Card::increment();
         $this->name = $name;
         $this->dob = $dob;
         $this->email = $email ?? "unknown";
@@ -60,6 +68,52 @@ class Card
     public function __clone()
     {
         // TODO
+    }
+
+    public function __serialize() {
+        return [
+            "id" => $this->id,
+            "title" => $this->title,
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "email" => $this->email,
+            "phone" => $this->phone,
+            "address_one" => $this->address_one,
+            "address_two" => $this->address_two,
+            "city" => $this->city,
+            "county" => $this->county,
+            "postcode" => $this->postcode,
+            "country" => $this->country
+        ];
+    }
+
+    public function __unseriallize(array $data) {
+        $this->id = $data["id"];
+        $this->title = $data["title"];
+        $this->first_name = $data["first_name"];
+        $this->last_name = $data["last_name"];
+        $this->email = $data["email"];
+        $this->phone = $data["phone"];
+        $this->address_one = $data["address_one"];
+        $this->address_two = $data["address_two"];
+        $this->city = $data["city"];
+        $this->county = $data["county"];
+        $this->postcode = $data["postcode"];
+        $this->country = $data["country"];
+    }
+
+    function set_title($title) {
+        if(!isset($this->title)):
+            $this->title = $title;
+        endif;
+    }
+
+    function set_first_name($first_name) {
+        $this->first_name = $first_name;
+    }
+
+    function set_last_name($last_name) {
+        $this->last_name = $last_name;
     }
 
     public function __set($property, $value)
