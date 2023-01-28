@@ -1,0 +1,54 @@
+[
+    {
+        "name": "Jane Doe",
+        "age": 35,
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "zip": "12345"
+        },
+        "phoneNumbers": [
+            {
+                "type": "home",
+                "number": "555-555-1234"
+            },
+            {
+                "type": "work",
+                "number": "555-555-5678"
+            }
+        ],
+        "socialMedia": {
+            "facebook": "https:\/\/www.facebook.com\/janesmith",
+            "twitter": "https:\/\/twitter.com\/janesmith",
+            "instagram": "https:\/\/www.instagram.com\/janesmith"
+        },
+        "url": "https:\/\/www.janesmith.com"
+    },
+    {
+        "name": "John Doe",
+        "age": 30,
+        "address": {
+            "street": "456 Elm St",
+            "city": "Othertown",
+            "state": "NY",
+            "zip": "67890"
+        },
+        "phoneNumbers": [
+            {
+                "type": "home",
+                "number": "555-555-4321"
+            },
+            {
+                "type": "work",
+                "number": "555-555-8765"
+            }
+        ],
+        "socialMedia": {
+            "facebook": "https:\/\/www.facebook.com\/johndoe",
+            "twitter": "https:\/\/twitter.com\/johndoe",
+            "instagram": "https:\/\/www.instagram.com\/johndoe"
+        },
+        "url": "https:\/\/www.johndoe.com"
+    }
+]
