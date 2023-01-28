@@ -5,8 +5,11 @@ class SocialMedia
     private string $twitter;
     private string $instagram;
 
-    public function __construct(string $facebook = null, string $twitter = null, string $instagram = null)
-    {
+    public function __construct(
+        string $facebook = null,
+        string $twitter = null,
+        string $instagram = null
+    ) {
         $this->facebook = $facebook ?? "na";
         $this->twitter = $twitter ?? "na";
         $this->instagram = $instagram ?? "na";

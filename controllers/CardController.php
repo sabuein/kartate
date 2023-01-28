@@ -26,20 +26,26 @@ class CardController
         $name = $name ?? "Salaheddin AbuEin";
         $dob = $dob ?? "1987-01-18";
         $email = $email ?? "sabuein@gmail.com";
-        $address = $address ?? new Address(
-            "129 Seymour Road",
-            "London",
-            "Greater London",
-            "E10 7LZ",
-            "United Kingdom"
-        );
+        $address =
+            $address ??
+            new Address(
+                "129 Seymour Road",
+                "London",
+                "Greater London",
+                "E10 7LZ",
+                "United Kingdom"
+            );
         $numbers = $numbers ?? new PhoneNumbers(mobile: "07930120661");
-        $social = $social ?? new SocialMedia(
-            twitter: "https://twitter.com/sabuein",
-            facebook: "https://www.facebook.com/sabuein/",
-            instagram: "https://www.instagram.com/sabuein/"
-        );
-        $url = $url ?? new URL(["https://sabuein.github.io/", "https://abuein.com/"]);
+        $social =
+            $social ??
+            new SocialMedia(
+                twitter: "https://twitter.com/sabuein",
+                facebook: "https://www.facebook.com/sabuein/",
+                instagram: "https://www.instagram.com/sabuein/"
+            );
+        $url =
+            $url ??
+            new URL(["https://sabuein.github.io/", "https://abuein.com/"]);
 
         return new Card($name, $dob, $email, $address, $numbers, $social, $url);
     }
