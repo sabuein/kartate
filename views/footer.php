@@ -1,4 +1,1 @@
-<?php
-echo "</body>\r\n";
-echo "</html>\r\n";
-?>
+<?= "</body>\r\n</html>\r\n"; ?>

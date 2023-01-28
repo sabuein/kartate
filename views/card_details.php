@@ -1,5 +1,5 @@
 <?php
-echo <<<EOL
+echo <<<EOT
 <div>
     <h1>Card Details</h1>
     <p>ID: $card->id</p>
@@ -11,5 +11,5 @@ echo <<<EOL
     <p>Social media: $card->socialMedia</p>
     <p>Other links: $card->url</p>
 </div>\r\n
-EOL;
+EOT;
 ?>
