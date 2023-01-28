@@ -1,8 +1,8 @@
 <?php
 
 require_once "$rootDir/models/Address.php";
-require_once "$rootDir/models/ContactNumbers.php";
 require_once "$rootDir/models/IO.php";
+require_once "$rootDir/models/PhoneNumbers.php";
 require_once "$rootDir/models/SocialMedia.php";
 require_once "$rootDir/models/URL.php";
 
@@ -14,23 +14,25 @@ class Card
     public string $dob;
     public string $email;
     public Address $address;
-    public ContactNumbers $contactNumbers;
+    public PhoneNumbers $phoneNumbers;
     public SocialMedia $socialMedia;
     public URL $url;
-    
+
     private $gender;
+
     private $allowedGenders = ["male", "female", "non-binary", "other"];
 
-    static function increment() {
+    static function increment()
+    {
         self::$index++;
     }
-    
+
     public function __construct(
         string $name,
         string $dob,
         string $email = null,
         Address $address,
-        ContactNumbers $contactNumbers,
+        PhoneNumbers $phoneNumbers,
         SocialMedia $socialMedia,
         URL $url
     ) {
@@ -40,7 +42,7 @@ class Card
         $this->dob = $dob;
         $this->email = $email ?? "unknown";
         $this->address = $address;
-        $this->contactNumbers = $contactNumbers;
+        $this->phoneNumbers = $phoneNumbers;
         $this->socialMedia = $socialMedia;
         $this->url = $url;
     }
@@ -70,50 +72,30 @@ class Card
         // TODO
     }
 
-    public function __serialize() {
+    public function __serialize()
+    {
         return [
             "id" => $this->id,
-            "title" => $this->title,
-            "first_name" => $this->first_name,
-            "last_name" => $this->last_name,
+            "name" => $this->name,
+            "dob" => $this->dob,
             "email" => $this->email,
-            "phone" => $this->phone,
-            "address_one" => $this->address_one,
-            "address_two" => $this->address_two,
-            "city" => $this->city,
-            "county" => $this->county,
-            "postcode" => $this->postcode,
-            "country" => $this->country
+            "address" => $this->address,
+            "phoneNumbers" => $this->phoneNumbers,
+            "socialMedia" => $this->socialMedia,
+            "url" => $this->url,
         ];
     }
 
-    public function __unseriallize(array $data) {
+    public function __unseriallize(array $data)
+    {
         $this->id = $data["id"];
-        $this->title = $data["title"];
-        $this->first_name = $data["first_name"];
-        $this->last_name = $data["last_name"];
+        $this->name = $data["name"];
+        $this->dob = $data["dob"];
         $this->email = $data["email"];
-        $this->phone = $data["phone"];
-        $this->address_one = $data["address_one"];
-        $this->address_two = $data["address_two"];
-        $this->city = $data["city"];
-        $this->county = $data["county"];
-        $this->postcode = $data["postcode"];
-        $this->country = $data["country"];
-    }
-
-    function set_title($title) {
-        if(!isset($this->title)):
-            $this->title = $title;
-        endif;
-    }
-
-    function set_first_name($first_name) {
-        $this->first_name = $first_name;
-    }
-
-    function set_last_name($last_name) {
-        $this->last_name = $last_name;
+        $this->address = $data["address"];
+        $this->phoneNumbers = $data["phoneNumbers"];
+        $this->socialMedia = $data["socialMedia"];
+        $this->url = $data["url"];
     }
 
     public function __set($property, $value)
@@ -128,7 +110,7 @@ class Card
                     $this->name = $value;
                 }
                 break;
-            case "age":
+            case "dob":
                 if ($value < 0 || $value > 150) {
                     throw new Exception(
                         "Error: Age must be between 0 and 150.\r\n"
@@ -137,18 +119,22 @@ class Card
                     $this->age = $value;
                 }
                 break;
-            case "gender":
-                if (in_array($value, $this->allowedGenders)) {
-                    $this->gender = $value;
-                } else {
-                    throw new Exception("Invalid gender value provided. Allowed values: " . implode(", ", $this->allowedGenders) . "\r\n");
-                }
-                break;
             case "email":
                 if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     throw new Exception("Error: Invalid email format.\r\n");
                 } else {
-                    $this->email = $value;
+                    $this->email = strtolower($value);
+                }
+                break;
+            case "gender":
+                if (in_array($value, $this->allowedGenders)) {
+                    $this->gender = $value;
+                } else {
+                    throw new Exception(
+                        "Invalid gender value provided. Allowed values: " .
+                            implode(", ", $this->allowedGenders) .
+                            "\r\n"
+                    );
                 }
                 break;
             case "phone":
@@ -168,20 +154,6 @@ class Card
         }
     }
 
-    public function validate()
-    {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            return "Invalid email address";
-        }
-        if (strlen($this->name) < 2) {
-            return "Name is too short";
-        }
-        if ($this->age < 0 || $this->age > 150) {
-            return "Invalid age";
-        }
-        return true;
-    }
-
     public function save()
     {
         if ($this->validate() === true) {
@@ -190,16 +162,6 @@ class Card
         } else {
             return $this->validate();
         }
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     public function displayInfo()

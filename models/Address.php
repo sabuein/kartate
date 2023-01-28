@@ -12,6 +12,7 @@ class Address {
         $this->state = $state;
         $this->zip = $zip;
         $this->country = $country;
+        return $this;
     }
 
     public function __get($property) {

@@ -3,7 +3,6 @@
 // require_once "$rootDir/models/Form.php";
 require_once "$rootDir/models/Card.php";
 
-// $card = new Card($name, $dob, $email, $address, $numbers, $social, $url);
 // $validation_result = $card->validate();
 
 // if ($validation_result === true) {
@@ -34,9 +33,13 @@ class CardController
             "E10 7LZ",
             "United Kingdom"
         );
-        $numbers = $numbers ?? new ContactNumbers();
-        $social = $social ?? new SocialMedia();
-        $url = $url ?? new URL(["https://sabuein.github.io/"]);
+        $numbers = $numbers ?? new PhoneNumbers(mobile: "07930120661");
+        $social = $social ?? new SocialMedia(
+            twitter: "https://twitter.com/sabuein",
+            facebook: "https://www.facebook.com/sabuein/",
+            instagram: "https://www.instagram.com/sabuein/"
+        );
+        $url = $url ?? new URL(["https://sabuein.github.io/", "https://abuein.com/"]);
 
         return new Card($name, $dob, $email, $address, $numbers, $social, $url);
     }

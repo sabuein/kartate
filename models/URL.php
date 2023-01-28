@@ -10,5 +10,22 @@ class URL
         endfor;
         return $this;
     }
+
+    public function __get($property)
+    {
+        return $this->$property;
+    }
+
+    public function __set($property, $value)
+    {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+    }
+
+    public function __toString()
+    {
+        return implode(", ", $this->links);
+    }
 }
 ?>
