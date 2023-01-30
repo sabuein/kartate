@@ -9,8 +9,8 @@ echo <<<EOT
     <title>Kartate</title>
 </head>\r\n
 EOT;
-if (isset($page_slug)):
-    echo "<body class=\"page-$page_slug\">";
+if (null !== SLUG):
+    echo "<body class=\"page-" . SLUG ."\">";
 else:
     echo "<body>";
 endif;

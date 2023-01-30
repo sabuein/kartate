@@ -14,7 +14,7 @@ require_once "$rootDir/models/Card.php";
 
 class CardController
 {
-    public function create(
+    public function add(
         $name = null,
         $dob = null,
         $email = null,
@@ -52,17 +52,17 @@ class CardController
 
     public function read($card_id)
     {
-        // code to read a person from the database goes here
+        // code to read a card from the database goes here
     }
 
-    public function update($card_id, $new_name, $new_age, $new_gender)
+    public function modify($card_id, $new_name, $new_age, $new_gender)
     {
-        // code to update a person in the database goes here
+        // code to modify a card in the database goes here
     }
 
     public function delete($card_id)
     {
-        // code to delete a person from the database goes here
+        // code to delete a card from the database goes here
     }
 }
 ?>

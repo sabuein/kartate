@@ -154,17 +154,25 @@ class Card
         }
     }
 
-    public function save()
+    public function save() : bool 
     {
         if ($this->validate() === true) {
             // Save the data to a database
-            return "Data saved successfully";
+            echo "Data saved successfully\r\n";
+            return true;
         } else {
+            echo "There is a problem in saving the data\r\n";
             return $this->validate();
         }
     }
 
-    public function displayInfo()
+    public function validate() : bool
+    {
+        // TODO
+        return true;
+    }
+
+    public function displayInfo() : void
     {
         echo "Name: " . $this->name . "\r\n";
         echo "Age: " . $this->getAge() . "\r\n";
